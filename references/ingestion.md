@@ -4,10 +4,15 @@
 
 ## 按类型处理
 
-### PDF
-- 优先用 `pdf` skill 抽文字与图;含表格用其表格抽取。
-- 扫描件(无文字层)→ OCR。
-- 大文件按页范围读。
+### PDF(通用做法,不依赖专有 skill)
+- **有文字层**:`pdftotext -layout x.pdf out.txt` 抽文字;大文件按页范围。
+- **中文图形字体 / 扫描件**(pdftotext 报 `CMap` 错、或输出乱码 mojibake):用 Python `pymupdf` 把页面渲染成 PNG 再**视觉读取**(相当于 OCR):
+  ```bash
+  pip install pymupdf   # 缺库时
+  python -c "import fitz;d=fitz.open('x.pdf');[d[i].get_pixmap(matrix=fitz.Matrix(2,2)).save('p%03d.png'%(i+1)) for i in range(a,b)]"
+  ```
+  **先渲染目录页拿章节结构,再按需逐章渲染读取**(省 token)。
+- 有 `pdf` skill 的环境可直接用它;没有(如 Codex)就走上面命令,效果一样。
 
 ### docx(常见:作业/答案,且公式与图常是图片)
 docx 本质是 zip。步骤:
@@ -22,7 +27,7 @@ node ~/.claude/skills/fuxi/scripts/extract_docx.js /tmp/docx_extract
 - ⚠️ Git Bash 的 `/tmp` 实际路径可能是 `C:/Users/<user>/AppData/Local/Temp/...`;Read 图片时用 `pwd -W` 或 `cygpath -w` 拿到 Windows 路径。
 
 ### pptx / xlsx
-- 用 `pptx` / `xlsx` skill 抽取(讲义、数据表)。
+- 有 `pptx` / `xlsx` skill 就用。无该 skill 时(如 Codex):pptx 用 `unzip` 抽 `ppt/slides/*.xml` 文字;xlsx 用 Python `openpyxl` 读单元格。
 
 ### 图片(jpg/png:提纲、题目、公式、图表截图)
 - 直接 Read,视觉理解。把关键文字/数字/图形转述记下。

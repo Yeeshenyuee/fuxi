@@ -40,7 +40,9 @@ fuxi/
 
 ## 安装
 
-把 `fuxi/` 整个文件夹放到 Claude Code 的技能目录(用户级:`~/.claude/skills/fuxi/`),重启会话即可。
+**Claude Code**:把 `fuxi/` 整个文件夹放到技能目录(用户级 `~/.claude/skills/fuxi/`),重启会话(说要复习 / 或 `/fuxi` 触发)。
+
+**Codex(及其他读 AGENTS.md 的 agent)**:仓库根带 `AGENTS.md` 入口——在本仓库目录里运行 Codex,或把本仓库路径写进你的 `~/.codex/AGENTS.md`(如"复习/学习任务时,阅读并遵循 `<path>/fuxi/SKILL.md`"),Codex 即会自动按流程走。本技能**不依赖任何厂商专有工具**:出图=写 SVG 文件、抽料=`pdftotext`/`pymupdf`/`unzip`+脚本,缺渲染器或专有 skill 也能正常跑。
 
 ## 用法
 
