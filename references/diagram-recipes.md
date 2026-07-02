@@ -5,14 +5,15 @@
 ## 通用硬规则(必守)
 
 - 根元素 `<svg width="100%" viewBox="0 0 680 H" role="img"><title>…</title><desc>…</desc>`。**680 宽度固定**,H 按内容高度。
-- 文字必须带类:`t`(14px 正文)、`ts`(12px 次要)、`th`(14px 中等/标题)。盒内文字加 `dominant-baseline="central"`。
-- 颜色用 ramp 类:`c-blue c-teal c-coral c-amber c-green c-purple c-gray c-pink`(自动适配深浅色)。一张图≤2~3个 ramp + gray。连线/曲线用内联 `stroke="#..."`(中间色号如 `#1D9E75` 两种模式都可见)。
+- **自包含优先(一图只写一遍)**:文字/颜色直接硬编码,同一段源码既能在 visualize 渲染、也能落盘后浏览器直开。**别用 `class="t/th/ts"`、`class="c-*"`、`var(--…)`**——那些是宿主才定义的,写进文件就是坏图。
+- 文字属性:标题 `font-family="sans-serif" font-size="14" font-weight="500" fill="#3d3d3a"`;正文同标题去掉 weight;次要/标注 `font-size="12" fill="#5f5e5a"`。盒内文字加 `dominant-baseline="central"`。
+- 盒子颜色按文末色表硬编码:rect `fill=50色 stroke=600色`,盒内标题 `fill=800色`、副标题 `fill=600色`。一张图≤2~3个色系+gray。连线/曲线内联 `stroke="#..."`(选中间色号如 `#1D9E75`,浅深底都可读)。
 - 箭头:在 `<defs>` 放标准 marker,连线用 `class="arr" marker-end="url(#arrow)"`;折线路径要 `fill="none"`。
 - 句式小写、无 emoji;盒子副标题≤5字词;别让标签互相压、别超出 viewBox。
 
 标准箭头 defs(每张图都加):
 ```
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
 ```
 
 ## 五种常用图型(按需选)
@@ -54,11 +55,11 @@ node -e 'const X=d=>80+(d/(2*Math.PI))*520; let p=[];for(let i=0;i<=160;i++){let
 ### 9. 因果链 / 分类图(flow / structural)
 用途:事件"背景→原因→过程→影响";或概念分类。因果用单向箭头链;分类用树。每盒只放关键词,细节留给文字。
 
-## 出图后务必导出文件(⚠️ 导出版必须"自包含化",否则文件是坏的)
+## 落盘与色表(同一段源码直接写文件,别写第二版)
 
-`class="t/ts/th"`、`class="c-*"`、`var(--…)` 都是 **visualize 宿主才定义的**——原样写进 .svg 文件后,单独打开会**文字没字体字号、盒子没颜色**。导出到 `复习/<科目>/图/<描述名>.svg` 前,按下表把类替换成硬编码属性(对话渲染版仍可用类,两版分开):
+自包含 SVG 直接 Write 到 `复习/<科目>/图/<描述名>.svg`。若参考 visualize 文档里"带类"的示例,先按下表换成硬编码再用:
 
-| 渲染版写法 | 导出版替换成 |
+| 带类写法(勿直接用) | 换成 |
 |---|---|
 | `class="th"` | `font-family="sans-serif" font-size="14" font-weight="500" fill="#3d3d3a"` |
 | `class="t"` | `font-family="sans-serif" font-size="14" fill="#3d3d3a"` |
@@ -69,11 +70,11 @@ node -e 'const X=d=>80+(d/(2*Math.PI))*520; let p=[];for(let i=0;i<=160;i++){let
 
 常用 ramp 色(50 填充 / 600 描边·副标题 / 800 标题):gray `F1EFE8/5F5E5A/444441` · blue `E6F1FB/185FA5/0C447C` · teal `E1F5EE/0F6E56/085041` · coral `FAECE7/993C1D/712B13` · amber `FAEEDA/854F0B/633806` · green `EAF3DE/3B6D11/27500A` · purple `EEEDFE/534AB7/3C3489` · red `FCEBEB/A32D2D/791F1F`。
 
-导出后自查:文件里**不残留** `class=` 与 `var(`。命名用内容描述(如 `ch3_自并励接线图.svg`),别用 image1。
+落盘前自查:源码里**不残留** `class=` 与 `var(`。命名用内容描述(如 `ch3_自并励接线图.svg`),别用 image1。
 
 ## 易错清单(出图前自检)
 
 - viewBox 高度 = 最低元素底边 + ~20,别留大片空白也别裁切。
 - 同行盒子间留 ≥20px;`text-anchor="end"` 的标签别越过 x=0。
 - 折线/曲线 path 一定 `fill="none"`,否则糊成黑块。
-- 深色模式:每个文字/线在近黑底上仍可读(用 ramp 类或中间色号 + 语义变量)。
+- 配色都选中间色号(自包含版不自动适配深色模式,别用纯白/纯黑细线,浅深底都要可读)。
