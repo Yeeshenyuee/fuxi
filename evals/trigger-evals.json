@@ -1,0 +1,22 @@
+[
+  {"query": "帮我复习高数,下周三期中考,我有老师的PPT和两套往年卷", "should_trigger": true},
+  {"query": "这是我《信号与系统》的课件pdf,我零基础,给我讲到懂", "should_trigger": true},
+  {"query": "马原下周要考了,全是要背的东西,怎么快速过一遍还能记住", "should_trigger": true},
+  {"query": "把这份真题和答案整理成复习重点,顺便出套模拟卷考考我", "should_trigger": true},
+  {"query": "考研英语单词背了就忘,帮我做成记忆卡片按遗忘曲线复习", "should_trigger": true},
+  {"query": "我下个月15号考会计初级,手里有教材,帮我定个每天的复习计划", "should_trigger": true},
+  {"query": "老师划了重点我拍照发你,照着给我讲明白原理,别照书念", "should_trigger": true},
+  {"query": "quiz me on chapter 3 of my biology notes, i keep failing the practice tests", "should_trigger": true},
+  {"query": "电路原理挂科重修,这学期想一次过,资料齐全求带", "should_trigger": true},
+  {"query": "把我这几页笔记做成能背的口诀和自测题", "should_trigger": true},
+  {"query": "帮我写一篇关于机器学习的文献综述,明天组会要用", "should_trigger": false},
+  {"query": "把这个pdf转成word格式", "should_trigger": false},
+  {"query": "python的装饰器是什么?一句话解释下", "should_trigger": false},
+  {"query": "帮我排一下下学期的课程表,别和实验课冲突", "should_trigger": false},
+  {"query": "翻译这篇英文文献的摘要", "should_trigger": false},
+  {"query": "帮我写今天电路实验的实验报告,数据在这", "should_trigger": false},
+  {"query": "我是老师,帮我给学生出一套期末试卷和评分标准", "should_trigger": false},
+  {"query": "推荐几本学C++的入门书", "should_trigger": false},
+  {"query": "帮我做个背单词的APP,react native的", "should_trigger": false},
+  {"query": "整理一下这次会议的纪要重点", "should_trigger": false}
+]

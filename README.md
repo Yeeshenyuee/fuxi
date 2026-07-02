@@ -76,6 +76,16 @@ fuxi/
 
 直接对 Claude 说要复习/备考/把资料讲到懂,或 `/fuxi`,然后把资料丢给它。开课前它会先**确认资料清单(可随时增删改)+ 摸清你的基础与学习偏好**,再自动判学科类型、建框架、配图讲解,并支持"继续 / 这个不懂 / 自测 / 加删资料"等交互。
 
+## 效果示例
+
+见 [`examples/`](examples/):文科(B 类)完整讲解产物 + 导出的自包含 SVG 图;理工(A 类)风格见 [`references/exemplar-lesson.md`](references/exemplar-lesson.md)。
+
+## 开发
+
+- 更新日志:[`CHANGELOG.md`](CHANGELOG.md)
+- 回归/触发评测:[`evals/`](evals/)(改动 skill 前先补 case,改后跑一遍防改坏)
+- 协议:[MIT](LICENSE)
+
 ---
 
 🤖 Built with [Claude Code](https://claude.com/claude-code)
