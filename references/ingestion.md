@@ -13,12 +13,12 @@
 
 ### PDF(通用做法,不依赖专有 skill)
 - **有文字层**:`pdftotext -layout x.pdf out.txt` 抽文字;大文件按页范围。
-- **中文图形字体 / 扫描件**(pdftotext 报 `CMap` 错、或输出乱码 mojibake):用 Python `pymupdf` 把页面渲染成 PNG 再**视觉读取**(相当于 OCR):
+- **中文图形字体 / 扫描件**(pdftotext 报 `CMap` 错、或输出乱码 mojibake):用本 skill 打包的脚本把页面渲染成 PNG 再**视觉读取**(相当于 OCR):
   ```bash
   pip install pymupdf   # 缺库时
-  python -c "import fitz;d=fitz.open('x.pdf');[d[i].get_pixmap(matrix=fitz.Matrix(2,2)).save('p%03d.png'%(i+1)) for i in range(a,b)]"
+  python <skill目录>/scripts/render_pdf.py "教材.pdf" 1 8 /tmp/pages   # 起页 止页 输出目录
   ```
-  **先渲染目录页拿章节结构,再按需逐章渲染读取**(省 token)。
+  **先渲染目录页拿章节结构(建索引),再按需逐章渲染读取**(省 token)。
 - 有 `pdf` skill 的环境可直接用它;没有(如 Codex)就走上面命令,效果一样。
 
 ### docx(常见:作业/答案,且公式与图常是图片)

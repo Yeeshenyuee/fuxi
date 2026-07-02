@@ -49,6 +49,29 @@ fuxi/
 
 **Codex(及其他读 AGENTS.md 的 agent)**:仓库根带 `AGENTS.md` 入口——在本仓库目录里运行 Codex,或把本仓库路径写进你的 `~/.codex/AGENTS.md`(如"复习/学习任务时,阅读并遵循 `<path>/fuxi/SKILL.md`"),Codex 即会自动按流程走。本技能**不依赖任何厂商专有工具**:出图=写 SVG 文件、抽料=`pdftotext`/`pymupdf`/`unzip`+脚本,缺渲染器或专有 skill 也能正常跑。
 
+## 一键安装(推荐:复制整段发给你的 Claude Code 或 Codex)
+
+```text
+帮我安装并配置 "fuxi 复习教练" 技能,让我在 Claude Code 和 Codex 里都能用。
+仓库:https://github.com/Yeeshenyuee/fuxi
+
+请用 shell 按以下步骤执行(自动判断我的操作系统;Windows 用 %USERPROFILE% 代替 ~):
+
+1) 把仓库克隆或更新到 Claude Code 技能目录 ~/.claude/skills/fuxi :
+   - 若该目录已存在 → 进去执行 git pull 更新;
+   - 否则执行 git clone https://github.com/Yeeshenyuee/fuxi.git ~/.claude/skills/fuxi
+   - (没有 git 就从上面网址点 Code→Download ZIP,解压到该目录,确保存在 ~/.claude/skills/fuxi/SKILL.md)
+
+2) 让 Codex 也能用:在 Codex 全局指引文件(通常是 ~/.codex/AGENTS.md,不存在就新建)里追加下面这行(已有同样内容就别重复):
+   学习/复习/备考/把资料讲到懂/出自测卷等任务时,请阅读并遵循 ~/.claude/skills/fuxi/SKILL.md 全文,按其流程执行。
+
+3) 校验:确认 ~/.claude/skills/fuxi/SKILL.md 和 ~/.claude/skills/fuxi/AGENTS.md 都存在,并打印它们各自的第一行给我看。
+
+4) 完成后告诉我"安装成功",以及用法:Claude Code 里说"帮我复习<某门课>"或输入 /fuxi(可能需重启会话);Codex 里直接说"帮我复习<某门课>"即可。
+
+装好后先别开始复习,等我提供资料。
+```
+
 ## 用法
 
 直接对 Claude 说要复习/备考/把资料讲到懂,或 `/fuxi`,然后把资料丢给它。开课前它会先**确认资料清单(可随时增删改)+ 摸清你的基础与学习偏好**,再自动判学科类型、建框架、配图讲解,并支持"继续 / 这个不懂 / 自测 / 加删资料"等交互。

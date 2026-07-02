@@ -54,9 +54,22 @@ node -e 'const X=d=>80+(d/(2*Math.PI))*520; let p=[];for(let i=0;i<=160;i++){let
 ### 9. 因果链 / 分类图(flow / structural)
 用途:事件"背景→原因→过程→影响";或概念分类。因果用单向箭头链;分类用树。每盒只放关键词,细节留给文字。
 
-## 出图后务必导出文件
+## 出图后务必导出文件(⚠️ 导出版必须"自包含化",否则文件是坏的)
 
-同一段 `<svg>…</svg>` 源码用 Write 落到 `复习/<科目>/图/<描述名>.svg`(纯 svg,可浏览器单开)。命名用内容描述(如 `ch3_自并励接线图.svg`),别用 image1。
+`class="t/ts/th"`、`class="c-*"`、`var(--…)` 都是 **visualize 宿主才定义的**——原样写进 .svg 文件后,单独打开会**文字没字体字号、盒子没颜色**。导出到 `复习/<科目>/图/<描述名>.svg` 前,按下表把类替换成硬编码属性(对话渲染版仍可用类,两版分开):
+
+| 渲染版写法 | 导出版替换成 |
+|---|---|
+| `class="th"` | `font-family="sans-serif" font-size="14" font-weight="500" fill="#3d3d3a"` |
+| `class="t"` | `font-family="sans-serif" font-size="14" fill="#3d3d3a"` |
+| `class="ts"` | `font-family="sans-serif" font-size="12" fill="#5f5e5a"` |
+| `class="c-X"` 的盒子 | rect:`fill=50色 stroke=600色`;盒内标题 `fill=800色`、副标题 `fill=600色`(色表见下) |
+| `class="arr"` | `stroke="#888780" stroke-width="1.5"`;marker 里的 `stroke="context-stroke"` 改成具体色 |
+| `class="box"` | 按 c-gray 处理 |
+
+常用 ramp 色(50 填充 / 600 描边·副标题 / 800 标题):gray `F1EFE8/5F5E5A/444441` · blue `E6F1FB/185FA5/0C447C` · teal `E1F5EE/0F6E56/085041` · coral `FAECE7/993C1D/712B13` · amber `FAEEDA/854F0B/633806` · green `EAF3DE/3B6D11/27500A` · purple `EEEDFE/534AB7/3C3489` · red `FCEBEB/A32D2D/791F1F`。
+
+导出后自查:文件里**不残留** `class=` 与 `var(`。命名用内容描述(如 `ch3_自并励接线图.svg`),别用 image1。
 
 ## 易错清单(出图前自检)
 
